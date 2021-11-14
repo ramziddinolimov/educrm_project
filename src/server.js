@@ -4,12 +4,13 @@ const customErrorMiddleware = require("./middlewares/customErrorMiddleware");
 const databseMiddleware = require("./middlewares/databseMiddleware");
 const postgres = require("./modules/pg/postgres");
 const route = require("./routes/route");
+const path = require("path");
 
 const app = express()
 
 async function server(port, mode){
     try {
-        app.listen(port || 3536, () => { console.log("Server is ready")})
+        app.listen(port || 4000, () => { console.log("SERVER IS READY")})
 
         app.use(express.json());
         app.use(express.urlencoded({extended: true}));
