@@ -72,4 +72,30 @@ module.exports = class CourseController {
             next(error);
         }
     }
+
+    static async CourseUpdatePutController(req, res, next) {
+        try {
+            permissionChecker("admin", req.user_permissions, res.error);
+
+            const course_id = req.params.course_id;
+            const course = await req.db.courses.findOne({
+                where: {course_id},
+                raw: true,
+            });
+
+            if(!course) throw new res.error(404, "Course not found");
+
+            const photo = req?.files?.photo;
+
+            if (photo && photo?.size > 5 * 1024 * 1024) {
+                throw new res.error(
+                    400,
+                    "Size of photo must be less than 5 MB"
+                );
+            }
+        }
+        catch (error) {
+            next(error);
+    } 
+    }
 }
