@@ -32,8 +32,21 @@ module.exports = class CourseController {
                         path.join(__dirname, "..", "public", "uploads", "photo_name")
                     );
                 }
+
+                const course = await req.db.courses.create({
+                    course_name: data.name,
+                    course_description: data.description,
+                    course_price: data.price,
+                    course_photo: photo_name,
+                });
+
+                res.status(201).json({
+                    ok: true,
+                    message: "Course created successfully",
+                });
+                
         } catch (error) {
-            
+            next(error);
         }
     }
 }
