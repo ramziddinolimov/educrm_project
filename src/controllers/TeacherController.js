@@ -1,1 +1,1 @@
-const permissionChecker = require('')
+const permissionChecker = require('../helpers/permissionChecker')

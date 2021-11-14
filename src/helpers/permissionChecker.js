@@ -13,5 +13,5 @@ module.exports = function PermissionChecker(
         }
     });
 
-    if (!permission) throw new Error(401, "You haven't permission");
+    if (!permission) throw new error(401, "You haven't permission");
 }
