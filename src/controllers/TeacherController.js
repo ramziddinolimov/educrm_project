@@ -65,5 +65,33 @@ module.exports = class TeacherController {
             next(error);
         }
     }
+
+
+    static async TeacherGetController(req, res, next) {
+        try {
+            const limit = req.query.limit || 15;
+            const offset = req.query.offset - 1 || 0;
+
+            const teachers = await req.db.teachers.findAll({
+                raw: true,
+                include: [
+                    {
+                        model: req.db.users,
+                        attributes: {exclude: ["user_password"],},
+                    },
+                ],
+                limit,
+                offset: offset * limit,
+            })
+
+            res.json({
+                ok: true,
+                message: "Teachers",
+                data: teachers,
+            })
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
