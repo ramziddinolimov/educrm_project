@@ -86,3 +86,4 @@ module.exports = class UserController {
         }
     }
 }
+
