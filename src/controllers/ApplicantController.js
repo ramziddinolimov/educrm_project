@@ -48,6 +48,25 @@ module.exports = class AddApplicantController {
             const course = await req.db.courses.findOne({
                 where: {course_id,},
             });
+
+            if (!course) {
+                throw new res.error(404, "Course is not found");
+            }
+
+            const data = await AddApplicantValidation(req.body, res.error);
+
+            const applicant = await req.db.applicants.create({
+                applicant_name: data.name,
+                applicant_gender: data.gender,
+                applicant_birth_date: data.birth_date,
+                applicant_description: data.description,
+                applicant_phone: data.phone,
+                applicant_source: data.source,
+                applicant_status: "waiting",
+                course_id,
+                user_id: req.session.user_id,
+            });
+            console.log(applicant);
         } catch (error) {
             next(error);
         }
