@@ -133,7 +133,10 @@ module.exports = class CourseController {
                 }
             );
 
-            
+            res.status(200).json({
+                ok: true,
+                message: "Updated successfully"
+            });
         }
         catch (error) {
             next(error);
