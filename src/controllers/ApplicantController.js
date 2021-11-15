@@ -35,4 +35,13 @@ module.exports = class AddApplicantController {
             next(error);
         }
     }
+
+
+    static async ApplicantPostController (req, res, next) {
+        try {
+            
+        } catch (error) {
+            next(error);
+        }
+    }
 }
