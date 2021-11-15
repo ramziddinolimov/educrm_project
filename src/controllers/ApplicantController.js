@@ -67,8 +67,15 @@ module.exports = class AddApplicantController {
                 user_id: req.session.user_id,
             });
             console.log(applicant);
+
+            res.status(201).json({
+                ok: true,
+                message: "Created successfully",
+            })
         } catch (error) {
             next(error);
         }
     }
+
+    
 }
