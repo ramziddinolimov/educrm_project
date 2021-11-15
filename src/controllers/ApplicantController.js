@@ -39,7 +39,11 @@ module.exports = class AddApplicantController {
 
     static async ApplicantPostController (req, res, next) {
         try {
-            
+            permissionChecker(
+                ["admin", "operator"],
+                req.user_permissions,
+                res.error
+            )
         } catch (error) {
             next(error);
         }
