@@ -77,5 +77,24 @@ module.exports = class AddApplicantController {
         }
     }
 
-    
+    static async ApplicantPutController(req, res, next) {
+        try {
+            permissionChecker(
+                ["admin", "operator"],
+                req.user_permissions,
+                res.error
+            );
+
+            const applicant_id = req.params.applicant_id;
+            const applicant = await req.db.applicants.findOne({
+                where: {applicant_id,},
+            });
+            
+            if(!applicant) {
+                throw new res.error(404, "Course is not found")
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
 }
