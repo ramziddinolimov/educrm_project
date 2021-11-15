@@ -121,6 +121,18 @@ module.exports = class CourseController {
                 );
             }     
             
+            await req.db.courses.update(
+                {
+                    course_name: data.name,
+                    course_description: data.description,
+                    course_price: data.price,
+                    course_photo: photo_name,
+                },
+                {
+                    where: {course_id,},
+                }
+            );
+
             
         }
         catch (error) {
