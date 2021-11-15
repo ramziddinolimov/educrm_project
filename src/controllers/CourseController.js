@@ -93,6 +93,35 @@ module.exports = class CourseController {
                     "Size of photo must be less than 5 MB"
                 );
             }
+
+            const data = await CourseCreateValidation(req.body, res.error);
+
+            let photo_name = photo
+                ? photo.md5 +
+                    "." +
+                        photo.mimeType.split("/")[
+                            photo.mimeType.split("/").length - 1
+                        ]
+                        : course
+                        ? course?.course_photo
+                        : null;
+            if (photo) {
+                fs.unlink(
+                    path.join(
+                        __dirname,
+                        "..",
+                        "public",
+                        "uploads",
+                        course.course_photo
+                    ),
+                    () => {}
+                );
+                photo.mv(
+                    path.join(__dirname, "..", "public", "uploads", photo_name)
+                );
+            }     
+            
+            
         }
         catch (error) {
             next(error);
