@@ -43,7 +43,11 @@ module.exports = class AddApplicantController {
                 ["admin", "operator"],
                 req.user_permissions,
                 res.error
-            )
+            );
+            const course_id = req.params.course_id;
+            const course = await req.db.courses.findOne({
+                where: {course_id,},
+            });
         } catch (error) {
             next(error);
         }
