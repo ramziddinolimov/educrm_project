@@ -1,7 +1,7 @@
 const {
 	TeacherCreatePostController,
 	TeacherUpdatePutController,
-	TeacherGetController,
+	// TeacherGetController,
 } = require("../../controllers/TeacherController");
 const authMiddleware = require("../../middlewares/authMiddleware");
 const permissionMiddleware = require("../../middlewares/permissionMiddleware");
