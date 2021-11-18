@@ -10,8 +10,3 @@ const TeacherRoute = require("express").Router();
 
 TeacherRoute.use([authMiddleware, permissionMiddleware]);
 
-TeacherRoute.post("/", TeacherCreatePostController);
-TeacherRoute.put("/:teacher_id", TeacherUpdatePutController);
-TeacherRoute.get("/", TeacherGetController);
-
-module.exports = TeacherRoute;
